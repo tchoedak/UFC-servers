@@ -48,7 +48,7 @@ jobs:
           sudo apt-get install -y sshpass
           echo "Running sshpass"
           sshpass -e sftp -oBatchMode=no -o StrictHostKeyChecking=no -b - ${{ secrets.REDIRECT_USERNAME }}@hosted26.nfoservers.com <<EOF
-          put system_files/*.uz2 public/
+          put system_files/*.uz2 public/utfiles
           exit
           EOF
 
