@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI-push-to-z-servers
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  push:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: push-system-files
+        env:
+          SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
+        run: |
+          echo $SSH_PEM > ~/.ssh/ufc-ohio.pem
+
+          echo "Pushing System files"
+          scp -i ~/.ssh/ufc-ohio.pem system_files/* ${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
+
+
+      - name: push-ini-files
+        env:
+            SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
+        run: |
+          echo $SSH_PEM > ~/.ssh/ufc-ohio.pem
+  
+          # Load passwords into ini Files
+          echo ${{ vars.XADMIN_INI }} > inis/XAdmin.ini
+          sed -i 's/AdminPassword={{PASSWORD}}/AdminPassword=${{ vars.ADMIN_PASSWORD }}/' inis/UT2004-TAM.ini
+
+          echo "Pushing ini files"
+          scp -i ~/.ssh/ufc-ohio.pem  inis/* ${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
+
