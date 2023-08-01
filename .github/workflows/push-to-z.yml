@@ -21,20 +21,23 @@ jobs:
   
     steps:
       - uses: actions/checkout@v3
-  
       - name: push-system-files
+        shell: bash
+        env:
+          SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
         run: |
-          echo ${{ secrets.SSH_PEM }} > ~/.ssh/ufc-ohio.pem
+          echo "${SSH_PEM}" > ~/.ssh/ufc-ohio.pem
 
           echo "Pushing System files"
           scp -i ~/.ssh/ufc-ohio.pem system_files/* ${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
 
 
       - name: push-ini-files
+        shell: bash
         env:
-            SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
+          SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
         run: |
-          echo ${{ secrets.SSH_PEM }} > ~/.ssh/ufc-ohio.pem
+          echo "${SSH_PEM}" > ~/.ssh/ufc-ohio.pem
   
           # Load passwords into ini Files
           echo ${{ vars.XADMIN_INI }} > inis/XAdmin.ini
