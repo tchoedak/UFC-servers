@@ -29,20 +29,16 @@ jobs:
           chmod 700 ~/.ssh/id_rsa
 
           echo "Pushing System files"
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/ufc-ohio.pem system_files/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa system_files/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
 
 
       - name: push-ini-files
         shell: bash
         run: |
-          mkdir ~/.ssh
-          echo "${{ secrets.UFC_OHIO_PEM }}" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh/id_rsa
-  
           # Load passwords into ini Files
           echo ${{ vars.XADMIN_INI }} > inis/XAdmin.ini
           sed -i 's/AdminPassword={{PASSWORD}}/AdminPassword=${{ vars.ADMIN_PASSWORD }}/' inis/UT2004-TAM.ini
 
           echo "Pushing ini files"
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/ufc-ohio.pem  inis/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa  inis/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
 
