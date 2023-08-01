@@ -28,6 +28,7 @@ jobs:
         run: |
           mkdir ~/.ssh
           echo "${SSH_PEM}" > ~/.ssh/ufc-ohio.pem
+          cat ~/.ssh/ufc-ohio.pem
 
           echo "Pushing System files"
           scp -i ~/.ssh/ufc-ohio.pem system_files/* ${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
