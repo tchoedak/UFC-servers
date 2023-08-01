@@ -26,6 +26,7 @@ jobs:
         env:
           SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
         run: |
+          touch ~/.ssh/ufc-ohio.pem
           echo "${SSH_PEM}" > ~/.ssh/ufc-ohio.pem
 
           echo "Pushing System files"
@@ -37,6 +38,7 @@ jobs:
         env:
           SSH_PEM: ${{ secrets.UFC_OHIO_PEM }}
         run: |
+          touch ~/.ssh/ufc-ohio.pem
           echo "${SSH_PEM}" > ~/.ssh/ufc-ohio.pem
   
           # Load passwords into ini Files
