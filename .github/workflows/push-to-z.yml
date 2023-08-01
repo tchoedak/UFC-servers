@@ -36,9 +36,7 @@ jobs:
         shell: bash
         run: |
           # Load passwords into ini Files
-          echo ${{ vars.XADMIN_INI }} > inis/XAdmin.ini
           sed -i 's/AdminPassword={{PASSWORD}}/AdminPassword=${{ vars.ADMIN_PASSWORD }}/' inis/UT2004-TAM.ini
 
           echo "Pushing ini files"
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa  inis/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
-
