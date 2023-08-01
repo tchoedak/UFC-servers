@@ -31,7 +31,6 @@ jobs:
           echo "Pushing System files"
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa system_files/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
 
-
       - name: push-ini-files
         shell: bash
         run: |
@@ -40,3 +39,9 @@ jobs:
 
           echo "Pushing ini files"
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa  inis/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
+
+      - name: Manual Step
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@{{ vars.Z1_IP }}
+          pm2 restart 0
