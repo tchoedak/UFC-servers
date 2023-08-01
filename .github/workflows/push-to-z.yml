@@ -40,8 +40,14 @@ jobs:
           echo "Pushing ini files"
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa  inis/* ubuntu@${{ vars.Z1_IP }}:/home/ubuntu/UT2004Server/System/
 
-      - name: Manual Step
+      - name: restart-z1
         if: github.event_name == 'workflow_dispatch'
         run: |
           ssh -i ~/.ssh/id_rsa ubuntu@{{ vars.Z1_IP }}
+          pm2 restart 0
+
+      - name: restart-z2
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@{{ vars.Z2_IP }}
           pm2 restart 0
