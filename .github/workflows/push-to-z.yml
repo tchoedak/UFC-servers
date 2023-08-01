@@ -43,7 +43,7 @@ jobs:
       - name: push-to-redirect
         shell: bash
         env:
-          SSH_PASS: ${{ secrets.REDIRECT_PASSWORD }}
+          SSHPASS: ${{ secrets.REDIRECT_PASSWORD }}
         run: |
           sudo apt-get install sshpass
           sshpass -e sftp -oBatchMode=no -b - ${{ secrets.REDIRECT_USERNAME }}@hosted26.nfoservers.com
