@@ -42,12 +42,12 @@ jobs:
         
       - name: push-to-redirect
         shell: bash
+        env:
+          SSH_PASS: ${{ secrets.REDIRECT_PASSWORD }}
         run: |
           apt-get install sshpass
           sshpass -e sftp -oBatchMode=no -b - ${{ secrets.REDIRECT_USERNAME }}@hosted26.nfoservers.com
           put system_files/*.uz2 public/
-        env:
-          SSH_PASS=${{ secrets.REDIRECT_PASSWORD }}
 
       - name: restart-z1
         if: github.event_name == 'workflow_dispatch'
