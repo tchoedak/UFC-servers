@@ -1,6 +1,10 @@
 
 3SPNvUFC - Custom 3SPN for UFC (ported from SoL version)
 
+v2.6
+- fix the rest of stats
+- make fart sound for console commands client onl
+
 v2.5
 - Restore DesiredNetUpdateRate player config option from 1.9, changes how often movement updates are sent to the server
 - Add UseNetUpdateRate, MinNetUpdateRate, MaxNetUpdateRate to server config
