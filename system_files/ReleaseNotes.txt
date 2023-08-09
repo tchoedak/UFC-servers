@@ -1,6 +1,10 @@
 
 3SPNvUFC - Custom 3SPN for UFC (ported from SoL version)
 
+v2.8
+- server config to allow 'boosted alt shield jump' (tich).  
+- server config to allow pausing sounds
+
 v2.7
 - fix shock combo not working
 - fix log spamming for lockrolloff
