@@ -1,6 +1,9 @@
 
 3SPNvUFC - Custom 3SPN for UFC (ported from SoL version)
 
+v3.0
+- fix bug with res message on TAM scoreboard
+
 v2.9
 - server config to disable necro combo
 - server config to disable necro 'Mate out RES' message
